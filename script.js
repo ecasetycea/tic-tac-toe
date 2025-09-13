@@ -5,6 +5,8 @@ const gameBoard = ( function () {
     const board = Array(9).fill(' ');
     let currentPlayer='x';
     const checkGameOver = function() {
+        let temp = currentPlayer;
+        currentPlayer = 's';
         if(checkWin('x')) {
             console.log("Player x has won!!!");
             return;
@@ -17,6 +19,7 @@ const gameBoard = ( function () {
             console.log("Board is full, the game is a draw!!!");
             return;
         }
+        currentPlayer = temp;
         return;
     };
     const checkWin = function(player) {
@@ -97,7 +100,7 @@ const gameBoard = ( function () {
         console.log('@@@@@@@');
     };
     const play = function(position) {
-        if(currentPlayer='s') {
+        if(currentPlayer==='s') {
             console.log("Can't play, game is already over");
             return;
         }
@@ -112,9 +115,26 @@ const gameBoard = ( function () {
         board[position] = currentPlayer;
         currentPlayer = (currentPlayer==='x') ? 'o' : 'x';
 
+        //REMOVE ON RELEASE
+        console.log();
         print();
+        console.log();
+
         checkGameOver();
     };
+    const reset = function() {
+        for(let i=0; i<9; i++) board[i]=' ';
+        currentPlayer = 'x';
+        console.log("Game has been reset!!!");
+        console.log();
+        print();
+    }
 
-    return { print, play };
+
+    // do stuff
+    console.log("New game has started!!!");
+    console.log();
+    print();
+
+    return { print, play, reset };
 })();
