@@ -1,9 +1,18 @@
 :root {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 16px;
+    /*font-size: 16px;*/
+    font-size: calc(6px + 1vw);
+    
+    --background-color: rgb(199, 255, 255);
+    --box-color: rgb(151, 255, 220);
+    --box-color-shade: rgb(141, 236, 205);
+    --box-color-click: rgb(129, 228, 195);
+    --border-color: lightgreen;
 
+    /* MAGIN NUMBERS DON'T CHANGE */
     --box-size: 5rem;
     --letter-size: 4rem;
+    --spacer-size: 0.2rem;
 }
 
 * {
@@ -12,12 +21,20 @@
     box-sizing: border-box;
 }
 
+.no-text-selection {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
 body {
-    background: lightcyan;
+    background: var(--background-color);
     width: 100vw;
     height: 100vh;
 
     display: flex;
+    flex-direction: column;
+    gap: 3rem;
     justify-content: center;
     align-items: center;
 }
@@ -25,12 +42,17 @@ body {
 div.container {
     display: grid;
     grid-template:
-        repeat(3, var(--box-size)) /
-        repeat(3, var(--box-size));
+        repeat(2, var(--box-size) var(--spacer-size))
+        var(--box-size)
+        /
+        repeat(2, var(--box-size) var(--spacer-size))
+        var(--box-size);
+    border: 0.4rem solid var(--border-color);
+    border-radius: 0.5rem;
 }
 
 div.box {
-    background-color: aquamarine;
+    background-color: var(--box-color);
     width: 100%;
     height: 100%;
 
@@ -39,6 +61,36 @@ div.box {
     align-items: center;
 }
 
-div.text {
+div.box.highlightable:hover {
+    background-color: var(--box-color-shade);
+    cursor: pointer;
+}
+div.box.highlightable:active {
+    background-color: var(--box-color-click);
+}
+
+div.gametext {
     font-size: var(--letter-size);
+}
+
+div.spacer {
+    background-color: var(--border-color);
+}
+
+div.statustext {
+    font-size: 1.2rem;
+}
+
+div.button {
+    padding: 0.5rem;
+    border: 0.27rem solid var(--border-color);
+    border-radius: 0.5rem;
+    background-color: var(--box-color);
+}
+div.button:hover {
+    background-color: var(--box-color-shade);
+    cursor: pointer;
+}
+div.button:active {
+    background-color: var(--box-color-click);
 }
