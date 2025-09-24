@@ -6,21 +6,26 @@ const gameBoard = ( function () {
     let currentPlayer='x';
     const checkGameOver = function() {
         let temp = currentPlayer;
-        currentPlayer = 's';
+        currentPlayer = 's'; // leave state stopped if end condition matched
         if(checkWin('x')) {
-            console.log("Player x has won!!!");
-            return;
+            let out = "Player x has won!!!"
+            console.log(out);
+            return out;
         }
         if(checkWin('o')) {
-            console.log("Player o has won!!!");
-            return;
+            let out = "Player o has won!!!"
+            console.log(out);
+            return out;
         }
         if(checkBoardFull()) {
-            console.log("Board is full, the game is a draw!!!");
-            return;
+            let out = "Board is full, the game is a draw!!!"
+            console.log(out);
+            return out;
         }
         currentPlayer = temp;
-        return;
+        let previousPlayer = (currentPlayer==='x') ? 'o' : 'x';
+        // return previous player, that just played. current player is for next turn
+        return "Player " + previousPlayer + " just played. Game continues.";
     };
     const checkWin = function(player) {
         let winCond = 0;
@@ -101,26 +106,31 @@ const gameBoard = ( function () {
     };
     const play = function(position) {
         if(currentPlayer==='s') {
-            console.log("Can't play, game is already over");
-            return;
+            let out="Can't play, game is already over";
+            console.log(out);
+            return out;
         }
         if(position>8 || position<0) {
-            console.log("Invalid position: out of bounds");
-            return;
+            let out = "Invalid position: out of bounds";
+            console.log(out);
+            return out;
         }
         if(board[position]!==' ') {
-            console.log("Invalid position: cell full");
-            return;
+            let out = "Invalid position: cell full";
+            console.log(out);
+            return out;
         }
         board[position] = currentPlayer;
+        // if not game over, checkGameOver returns flipped player (correct)
         currentPlayer = (currentPlayer==='x') ? 'o' : 'x';
 
-        //REMOVE ON RELEASE
+        //REMOVE ON RELEASE VERSION
         console.log();
         print();
         console.log();
+        //=========================
 
-        checkGameOver();
+        return checkGameOver();
     };
     const reset = function() {
         for(let i=0; i<9; i++) board[i]=' ';
@@ -139,4 +149,37 @@ const gameBoard = ( function () {
     return { print, play, reset };
 })();
 
+const interface = ( function () {
+    const status = document.querySelector("div.statustext");
 
+    for(let i=0; i<9; i++) {
+
+        const box = "div.box#b" + i; // i hate implicit casting
+        document.querySelector(box).addEventListener("click", function(e) {
+            let statusText = gameBoard.play(i);
+            status.textContent = statusText;
+            let player = statusText.charAt(7);
+            //yes this is junk, but simple and readable
+            if(e.target.firstChild.textContent==='') {
+                if(player==='x' || player==='o') {
+                    //update board display
+                    e.target.firstChild.textContent = (player==='x') ? 'X' : 'O';
+                }
+            }
+        });
+    }
+    /*
+    document.querySelector("div.box#b0").addEventListener("click", function(e) {
+        let statusText = gameBoard.play(0);
+        status.textContent = statusText;
+        let player = statusText.charAt(7); //position of player in status string
+        if(e.target.firstChild.textContent==='') {
+            if(player==='x' || player==='o') {
+                e.target.firstChild.textContent = (player==='x') ? 'X' : 'O';
+            }
+        }
+    });
+    */
+
+    return { };
+})();
