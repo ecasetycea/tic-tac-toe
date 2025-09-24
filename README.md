@@ -29,10 +29,10 @@ Full *'logs'* are available on the console printing the board on each step.
 The game can also be manually played from the console using
 `gameBoard.play(grid_position)`, where `grind_position` maps to the table below.
 
-| | | |
-|-|-|-|
-|0|1|2|
-|3|4|5|
-|6|7|8|
-| | | |
+| | | | | |
+|-|-|-|-|-|
+| |0|1|2| |
+| |3|4|5| |
+| |6|7|8| |
+| | | | | |
 
