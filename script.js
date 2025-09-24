@@ -5,27 +5,31 @@ const gameBoard = ( function () {
     const board = Array(9).fill(' ');
     let currentPlayer='x';
     const checkGameOver = function() {
+        // play(pos) function flips current player proactively. flip again for previous
+        let previousPlayer = (currentPlayer==='x') ? 'o' : 'x';
         let temp = currentPlayer;
         currentPlayer = 's'; // leave state stopped if end condition matched
         if(checkWin('x')) {
-            let out = "Player x has won!!!"
+            // TODO: FIX
+            // add previous player at start of string to pass what to fill the grid box with
+            // bad implemetation on play 'destroys' info about how to fill the box and have
+            // to pass it back somehow.
+            let out = previousPlayer + "Player x has won!!!";
             console.log(out);
             return out;
         }
         if(checkWin('o')) {
-            let out = "Player o has won!!!"
+            let out = previousPlayer + "Player o has won!!!";
             console.log(out);
             return out;
         }
         if(checkBoardFull()) {
-            let out = "Board is full, the game is a draw!!!"
+            let out = previousPlayer + "Board is full, the game is a draw!!!";
             console.log(out);
             return out;
         }
         currentPlayer = temp;
-        let previousPlayer = (currentPlayer==='x') ? 'o' : 'x';
-        // return previous player, that just played. current player is for next turn
-        return "Player " + previousPlayer + " just played. Game continues.";
+        return previousPlayer + "Player " + previousPlayer + " just played. Game continues.";
     };
     const checkWin = function(player) {
         let winCond = 0;
@@ -105,18 +109,22 @@ const gameBoard = ( function () {
         console.log('@@@@@@@');
     };
     const play = function(position) {
+        // TODO: FIX
+        // bad implementation on player flipping forces to pass info through
+        // status strings. final output cuts the first character, so here
+        // an extra space must be added
         if(currentPlayer==='s') {
-            let out="Can't play, game is already over";
+            let out=" Can't play, game is already over";
             console.log(out);
             return out;
         }
         if(position>8 || position<0) {
-            let out = "Invalid position: out of bounds";
+            let out = " Invalid position: out of bounds";
             console.log(out);
             return out;
         }
         if(board[position]!==' ') {
-            let out = "Invalid position: cell full";
+            let out = " Invalid position: cell full";
             console.log(out);
             return out;
         }
@@ -158,8 +166,11 @@ const interface = ( function () {
         const box = "div.box#b" + i; // i hate implicit casting
         document.querySelector(box).addEventListener("click", function(e) {
             let statusText = gameBoard.play(i);
-            status.textContent = statusText;
-            let player = statusText.charAt(7);
+
+            //extract player
+            let player = statusText.charAt(0);
+            //remove extra info on string
+            status.textContent = statusText.slice(1);
             //yes this is junk, but simple and readable
             if(e.target.firstChild.textContent==='') {
                 if(player==='x' || player==='o') {
