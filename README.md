@@ -6,6 +6,7 @@ Created as way to practice encapsulation through IIFEs without
 overloading myself with a project that's too large.
 
 **TODO:**
+- [x] make already played tiles unhighlightable
 - [ ] fix bad implementation of player flipping
 
 Can be played simply by clicking on the desired boxes. Checks

@@ -176,6 +176,7 @@ const interface = ( function () {
                 if(player==='x' || player==='o') {
                     //update board display
                     e.target.firstChild.textContent = (player==='x') ? 'X' : 'O';
+                    e.target.classList.remove("highlightable");
                 }
             }
         });
@@ -188,6 +189,7 @@ const interface = ( function () {
         for(let i=0; i<9; i++) {
             const box = "div.box#b" + i; // still hate implicit casting
             document.querySelector(box).firstChild.textContent = '';
+            document.querySelector(box).classList.add("highlightable");
         }
     });
 
