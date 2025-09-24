@@ -135,9 +135,11 @@ const gameBoard = ( function () {
     const reset = function() {
         for(let i=0; i<9; i++) board[i]=' ';
         currentPlayer = 'x';
-        console.log("Game has been reset!!!");
+        let out = "Game has been reset!!!";
+        console.log(out);
         console.log();
         print();
+        return(out);
     }
 
 
@@ -151,9 +153,8 @@ const gameBoard = ( function () {
 
 const interface = ( function () {
     const status = document.querySelector("div.statustext");
-
+    
     for(let i=0; i<9; i++) {
-
         const box = "div.box#b" + i; // i hate implicit casting
         document.querySelector(box).addEventListener("click", function(e) {
             let statusText = gameBoard.play(i);
@@ -168,18 +169,16 @@ const interface = ( function () {
             }
         });
     }
-    /*
-    document.querySelector("div.box#b0").addEventListener("click", function(e) {
-        let statusText = gameBoard.play(0);
+
+    document.querySelector("#reset").addEventListener("click", function(e) {
+        let statusText = gameBoard.reset();
         status.textContent = statusText;
-        let player = statusText.charAt(7); //position of player in status string
-        if(e.target.firstChild.textContent==='') {
-            if(player==='x' || player==='o') {
-                e.target.firstChild.textContent = (player==='x') ? 'X' : 'O';
-            }
+        //clear board
+        for(let i=0; i<9; i++) {
+            const box = "div.box#b" + i; // still hate implicit casting
+            document.querySelector(box).firstChild.textContent = '';
         }
     });
-    */
 
     return { };
 })();
