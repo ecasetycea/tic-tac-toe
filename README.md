@@ -11,15 +11,19 @@ overloading myself with a project that's too large.
 Can be played simply by clicking on the desired boxes. Checks
 for illegal moves, a.k.a. trying to play on a cell that's already full.
 
-<img src="img_normal.png" alt="normal image" height="300"/>
-<img src="img_full_cell.png" alt="full cell image" height="300"/>
+<p float="left">
+    <img src="img_normal.png" alt="normal image" height="300"/>
+    <img src="img_full_cell.png" alt="full cell image" height="300"/>
+</p>
 
 </br>
 Also has a check for when the game is over either by a player winning
 or by the board being full and coming to a draw.
 
-<img src="img_win.png" alt="win image" height="300"/>
-<img src="img_console.png" alt="console image" height="300"/>
+<p float="left">
+    <img src="img_win.png" alt="win image" height="300"/>
+    <img src="img_console.png" alt="console image" height="300"/>
+</p>
 
 Full *'logs'* are available on the console printing the board on each step.
 The game can also be manually played from the console using
