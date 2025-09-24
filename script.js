@@ -138,3 +138,5 @@ const gameBoard = ( function () {
 
     return { print, play, reset };
 })();
+
+
