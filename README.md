@@ -5,6 +5,9 @@ Simple tic-tac-toe game build using raw html, css and javascript.
 Created as way to practice encapsulation through IIFEs without
 overloading myself with a project that's too large.
 
+**TODO:**
+- [ ] fix bad implementation of player flipping
+
 Can be played simply by clicking on the desired boxes. Checks
 for illegal moves, a.k.a. trying to play on a cell that's already full.
 
